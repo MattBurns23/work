@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store 144 Top Cap Plan</title>
+<style>
+  :root{
+    --pine: #1f3a2e;
+    --pine-deep: #142720;
+    --cream: #f2ede1;
+    --tag: #f7f3e8;
+    --cranberry: #a3273c;
+    --gold: #b8923f;
+    --ink: #241c14;
+    --line: #d8cfb8;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background: var(--pine-deep);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(184,146,63,0.10), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(163,39,60,0.12), transparent 50%);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Georgia", serif;
+    min-height: 100vh;
+  }
+
+  .wrap{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 28px 18px 60px;
+  }
+
+  header{
+    text-align:center;
+    color: var(--cream);
+    padding: 18px 0 26px;
+  }
+
+  .eyebrow{
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--gold);
+    margin: 0 0 10px;
+  }
+
+  h1{
+    font-family: "Futura", "Trebuchet MS", sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 6vw, 40px);
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+
+  .sub{
+    font-size: 14px;
+    color: #cfd9cf;
+    margin: 0;
+  }
+
+  .search-shell{
+    background: var(--tag);
+    border-radius: 10px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    padding: 6px;
+    margin: 22px 0 8px;
+  }
+
+  .search-inner{
+    position: relative;
+  }
+
+  input#q{
+    width: 100%;
+    font-family: "Courier New", monospace;
+    font-size: 17px;
+    padding: 16px 46px 16px 18px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--ink);
+    outline: none;
+  }
+
+  input#q::placeholder{
+    color: #8b8371;
+  }
+
+  .clear-btn{
+    position:absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #9b937f;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+    display:none;
+  }
+  .clear-btn.show{display:block;}
+
+  .meta-row{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #b7c2b6;
+    font-size: 12px;
+    font-family: "Courier New", monospace;
+    letter-spacing: 0.04em;
+    margin: 0 4px 18px;
+  }
+
+  #count{color: var(--gold);}
+
+  .results{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card{
+    background: var(--tag);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-left: 5px solid var(--cranberry);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    animation: rise 0.25s ease both;
+  }
+
+  .card.pine{ border-left-color: var(--pine); }
+  .card.gold{ border-left-color: var(--gold); }
+
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(6px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .capnum{
+    font-family: "Futura", "Trebuchet MS", sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--pine);
+    min-width: 54px;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .capnum span{
+    display:block;
+    font-family: "Courier New", monospace;
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+
+  .divider{
+    width: 1px;
+    align-self: stretch;
+    background: var(--line);
+  }
+
+  .content{
+    flex: 1;
+    min-width: 0;
+  }
+
+  .desc{
+    font-size: 15.5px;
+    line-height: 1.35;
+    margin: 0 0 4px;
+  }
+
+  .desc mark{
+    background: rgba(184,146,63,0.35);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  .section-label{
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cranberry);
+  }
+
+  .section-label.none{ visibility: hidden; }
+
+  .empty{
+    text-align: center;
+    color: #cfd9cf;
+    padding: 50px 20px;
+  }
+
+  .empty .big{
+    font-family: "Futura", "Trebuchet MS", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .idle{
+    text-align:center;
+    color: #9fb0a2;
+    padding: 60px 20px 30px;
+    font-size: 14px;
+  }
+
+  footer{
+    text-align:center;
+    color: #7c8a7d;
+    font-size: 11px;
+    font-family: "Courier New", monospace;
+    margin-top: 34px;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 480px){
+    .capnum{ font-size: 22px; min-width: 44px; }
+    .desc{ font-size: 14.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Seasonal Planogram · Top Cap Locator</p>
+    <h1>Store 144 Top Cap Plan</h1>
+    <p class="sub">Type what you're looking for — get the cap number back.</p>
+  </header>
+
+  <div class="search-shell">
+    <div class="search-inner">
+      <input id="q" type="text" placeholder="e.g. gift bags, Grinch, silver decor, nutcrackers…" autocomplete="off" autofocus>
+      <button class="clear-btn" id="clearBtn" aria-label="Clear search">×</button>
+    </div>
+  </div>
+  <div class="meta-row">
+    <span>180 top caps · 2026 layout</span>
+    <span><span id="count">0</span> match<span id="plural">es</span></span>
+  </div>
+
+  <div id="results"></div>
+</div>
+
+<footer>Home Décor · Craft Seasonal Aisle · Hobbies Models · Frames · Floral Turn · Party</footer>
+
+<script>
+const DATA = [
+["1","Fall/Christmas Soldiered Display",""],
+["2","Fall Tableware 1 – Tins/ Baking",""],
+["3","Fall Tableware 2 – Basket Making / Baking",""],
+["4","Fall baking/tableware/crafts — Christmas Tableware 1",""],
+["5","Fall Candles/ Holders/ Arrangements – Christmas Tableware 2",""],
+["6","Fall Wall Décor/ overflow crafts – Christmas Bags/ Tissue",""],
+["7","Fall Yard Stakes/ overflow crafts – Christmas Bags/ Flat boxes",""],
+["8","Fall Garland Tabletop – Christmas Bows/ Tags",""],
+["9","Fall Pumpkins – Christmas Giftwrap/ Bows",""],
+["10","Fall Ribbon/Deco/Picks — Christmas Stockings",""],
+["11","Fall Picks — Christmas Stocking Holders/ Monogram/ Pets",""],
+["12","Fall Mini Wreaths – Christmas Lights and accessories",""],
+["13","Robert Stanley and Themed ornaments","Tree Flat"],
+["14","Color Ways 1 White/pink – Pink décor and all peggable and stems","Tree Flat"],
+["15","Color Ways 2 Silver/blue – All peggable and stems – Blue decor","Tree Flat"],
+["16","Color Ways 3 Gold/Red – Red Décor and all peggable and stems","Tree Flat"],
+["17","Color Ways 4 Table pieces","Tree Flat"],
+["18","Color Ways 5 Traditional – tabletop and wall decor","Tree Flat"],
+["19","Color Ways 6 Traditional – Peggable and garland","Tree Flat"],
+["20","Color Ways 7 Aspen Cove – Tabletop and wall decor","Tree Flat"],
+["21","Color Ways 8 Aspen Cove – Peggable and garland","Tree Flat"],
+["22","Christmas bows","Tree Flat"],
+["23","Cubes matching layout – Themed ornament overflow","Seasonal Turn"],
+["24","Cubes matching layout – Licensed ornaments / ornament hooks","Seasonal Turn"],
+["25","Cubes matching layout – Robert Stanley overflow","Seasonal Turn"],
+["26","Color Ways 9 peggable hot cocoa/sweets and treats/ gingerbread and stems","Seasonal Turn"],
+["27","Color Ways 10 Gingerbread and Cocoa table top décor","Seasonal Turn"],
+["28","Wall Decor",""],
+["29","Nativity",""],
+["30","Grinch Wearables/ Grinch Floral",""],
+["31","Grinch Decor",""],
+["32","Candles/Candle Rings",""],
+["33","Ribbon Trays 1 – 50",""],
+["34","Ribbon Trays 51 – 100",""],
+["35","Ribbon Trays 101 – 150",""],
+["36","Bells / Decorative Trees",""],
+["37","Barbs Small Tree Farm",""],
+["38","Lighted Tree Toppers","Party"],
+["39","Block Signs","Party"],
+["40","Pinecone/Natural and Snow","Party"],
+["41","Color Ways 9 Sweet and treats","Party"],
+["42","Color Ways 9 Sweet and treats","Party"],
+["43","Color Ways 10 Candy Cane Lane","Party"],
+["44","Color Ways 10 Candy Cane Lane","Party"],
+["45","Color Ways 10 Gingerbread and Cocoa Decor","Party"],
+["46","Color Ways 10 Gingerbread and Cocoa Décor","Party"],
+["47","Color Ways 1 White","Party"],
+["48","Color Ways 1 White","Party"],
+["49","Color Ways 1 White Decor","Party"],
+["50","Color Ways 1 Pink","Party"],
+["51","Color Ways 1 Pink","Party"],
+["52","Color Ways 2 Silver","Party"],
+["53","Color Ways 2 Silver","Party"],
+["54","Color Ways 2 Silver Decor","Party"],
+["55","Color Ways 2 Blue","Party"],
+["56","Color Ways 2 Blue","Party"],
+["57","Color Ways 3 Gold Decor","Party"],
+["58","Color Ways 3 Gold","Party"],
+["59","Color Ways 3 Gold","Party"],
+["60","Color Ways 3 Red","Party"],
+["61","Color Ways 3 Red","Party"],
+["62","Christmas Craft aisle totes/ Boxed ornaments top shelf only","Craft Seasonal Aisle"],
+["63","Christmas Craft aisle totes/ Boxed ornaments top shelf only","Craft Seasonal Aisle"],
+["64","Christmas Crafts 5/6","Craft Seasonal Aisle"],
+["65","Christmas Crafts 3/4","Craft Seasonal Aisle"],
+["66","Christmas Crafts 1/2","Craft Seasonal Aisle"],
+["67","Color Ways 4 Red/white/green","Craft Seasonal Aisle"],
+["68","Color Ways 4 Red/white/green","Craft Seasonal Aisle"],
+["69","Color Ways 4 decor","Craft Seasonal Aisle"],
+["70","Color Ways 5 Table Top","Craft Seasonal Aisle"],
+["71","Color Ways 5 Table Top","Craft Seasonal Aisle"],
+["72","Color Ways 6 Red/green/gold","Craft Seasonal Aisle"],
+["73","Color Ways 6 Red/green/gold","Craft Seasonal Aisle"],
+["74","Color Ways 6 Heartland Holiday","Craft Seasonal Aisle"],
+["75","Color Ways 6 Heartland Holiday","Craft Seasonal Aisle"],
+["76","Color Ways 7 Aspen Cove Wall Decor","Craft Seasonal Aisle"],
+["77","Color Ways 7 Aspen Cove Table Top","Craft Seasonal Aisle"],
+["78","Color Ways 7 Aspen Cove Table Top","Craft Seasonal Aisle"],
+["79","Color Ways 8 Aspen Cove Champagne","Craft Seasonal Aisle"],
+["80","Color Ways 8 Aspen Cove Champagne","Craft Seasonal Aisle"],
+["81","Color Ways 8 Aspen Cove","Craft Seasonal Aisle"],
+["82","Color Ways 8 Aspen Cove","Craft Seasonal Aisle"],
+["83","Christmas Picks 001 – 912 – 18 Skus","Hobbies Models"],
+["84","Christmas Picks 1001 – 1603 – 17 Skus","Hobbies Models"],
+["85","Christmas Picks 1605 – 1804 – 17 Skus","Hobbies Models"],
+["86","Christmas Picks 1808 – 1904 – 17 Skus","Hobbies Models"],
+["87","Christmas Picks 1905 – 2029 – 17 Skus","Hobbies Models"],
+["88","Christmas Picks 2035 – 2312 – 17 Skus","Hobbies Models"],
+["89","Christmas Picks 2313 – 2508 – 17 Skus","Hobbies Models"],
+["90","Christmas Picks 2509 – 2532 – 17 Skus","Hobbies Models"],
+["91","Christmas Picks 2533 – 2610 – 17 Skus","Hobbies Models"],
+["92","Christmas Picks 2611 – 2624 – 14 Skus","Hobbies Models"],
+["93","Christmas Picks Mp06, Mp08, Mp12, P101, P703, P704","Hobbies Models"],
+["94","Christmas Picks P711, P721, P802, P2101","Hobbies Models"],
+["95","n/a","Frames"],
+["96","n/a","Frames"],
+["97","n/a","Frames"],
+["98","n/a","Frames"],
+["99","n/a","Frames"],
+["100","n/a","Frames"],
+["101","Bag Pumpkins / Xmas Mini Wreaths","Frames"],
+["102","Bag Pumpkins/ Xmas Mini Wreaths","Frames"],
+["103","n/a","Frames"],
+["104","n/a","Frames"],
+["105","n/a","Frames"],
+["106","n/a","Frames"],
+["107","n/a","Frames"],
+["108","Christmas Dining","Frames"],
+["109","Christmas Dining","Frames"],
+["110","Christmas Dining Bushes on Top","Frames"],
+["111","Christmas arrangements Bushes on Top",""],
+["112","Christmas arrangements Bushes on Top",""],
+["113","Front End Candy Top Cap Bushes on Top",""],
+["114","Front End Top Cap Bushes on Top",""],
+["115","Christmas Stems Bushes on top","Floral Turn"],
+["116","Christmas Stems Bushes on top","Floral Turn"],
+["117","Christmas Stems Bushes on top","Floral Turn"],
+["118","Christmas Stems Bushes on top","Floral Turn"],
+["119","Christmas Stems Bushes on top","Floral Turn"],
+["120","Christmas Stems Bushes on top","Floral Turn"],
+["121","Christmas Stems Bushes on top","Floral Turn"],
+["122","Christmas Stems Bushes on top","Floral Turn"],
+["123","Fall Arrangement / Christmas Arrangement","Floral Turn"],
+["124","Fall Arrangement Display / Christmas Arrangement Display","Floral Turn"],
+["125","My Little Christmas","Home Décor Row 1"],
+["126","My Little Christmas","Home Décor Row 1"],
+["127","My Little Christmas","Home Décor Row 1"],
+["128","Lighted Décor/ Open stock Display","Home Décor Row 1"],
+["129","Fall Boxes Displayed","Home Décor Row 1"],
+["130","Fall Party","Home Décor Row 1"],
+["131","Fall Party","Home Décor Row 1"],
+["132","Fall Party","Home Décor Row 1"],
+["133","Fall Candles","Home Décor Row 1"],
+["134","Fall Candles","Home Décor Row 1"],
+["135","Fall Potpourri","Home Décor Row 1"],
+["136","Fall Potpourri","Home Décor Row 1"],
+["137","Christmas Potpourri","Home Décor Row 1"],
+["138","Christmas Potpourri","Home Décor Row 1"],
+["139","Lanterns","Home Décor Row 2"],
+["140","My Little Christmas Boxed Ornaments","Home Décor Row 2"],
+["141","My Little Christmas Boxed Ornaments","Home Décor Row 2"],
+["142","Cardinals","Home Décor Row 2"],
+["143","Cardinals","Home Décor Row 2"],
+["144","Licensed Hello Kitty","Home Décor Row 2"],
+["145","Licensed Bluey/ Stitch","Home Décor Row 2"],
+["146","Licensed Cups","Home Décor Row 2"],
+["147","Christmas Wearables","Home Décor Row 2"],
+["148","Christmas Wearables","Home Décor Row 2"],
+["149","Christmas Wearables","Home Décor Row 2"],
+["150","Gift Bows","Home Décor Row 2"],
+["151","Gift Bows","Home Décor Row 2"],
+["152","Foldable Gift Boxes","Home Décor Row 2"],
+["153","Small Gift Bags","Home Décor Row 2"],
+["154","Small Gift Bags","Home Décor Row 2"],
+["155","Gift Bags","Home Décor Row 2"],
+["156","Gift Bags","Home Décor Row 2"],
+["157","Gift Bags","Home Décor Row 2"],
+["158","Gift Bags","Home Décor Row 2"],
+["159","Lanterns","Home Décor Row 3"],
+["160","Lanterns","Home Décor Row 3"],
+["161","Lanterns","Home Décor Row 3"],
+["162","Nutcrackers","Home Décor Row 3"],
+["163","Nutcrackers","Home Décor Row 3"],
+["164","Nutcrackers","Home Décor Row 3"],
+["165","Santa Hats","Home Décor Row 3"],
+["166","Santa Hats","Home Décor Row 3"],
+["167","My Little Christmas trees","Home Décor Row 3"],
+["168","My Little Christmas trees","Home Décor Row 3"],
+["169","My Little Christmas trees","Home Décor Row 3"],
+["170","My Little Christmas trees","Home Décor Row 3"],
+["171","Throws","Home Décor Row 3"],
+["172","Throws","Home Décor Row 3"],
+["173","Throws","Home Décor Row 3"],
+["174","Phase 2 Food","Home Décor Row 3"],
+["175","Phase 2 Food","Home Décor Row 3"],
+["176","Phase 2 Food","Home Décor Row 3"],
+["177","Phase 2 Food","Home Décor Row 3"],
+["178","Phase 2 Food","Home Décor Row 3"],
+["179","Phase 2 Food","Home Décor Row 3"],
+["180","Phase 2 Food","Home Décor Row 3"]
+].map(([num, desc, section]) => ({num, desc, section}));
+
+const accentClasses = ["", "pine", "gold"];
+
+function escapeHtml(str){
+  return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function highlight(text, terms){
+  let out = escapeHtml(text);
+  terms.forEach(t => {
+    if(!t) return;
+    const esc = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.replace(new RegExp(`(${esc})`, 'gi'), '<mark>$1</mark>');
+  });
+  return out;
+}
+
+const resultsEl = document.getElementById('results');
+const countEl = document.getElementById('count');
+const pluralEl = document.getElementById('plural');
+const input = document.getElementById('q');
+const clearBtn = document.getElementById('clearBtn');
+
+function render(query){
+  const q = query.trim().toLowerCase();
+  clearBtn.classList.toggle('show', q.length > 0);
+
+  if(!q){
+    resultsEl.innerHTML = `<div class="idle">Start typing a description, category, or top cap number above.</div>`;
+    countEl.textContent = '0';
+    pluralEl.textContent = 'es';
+    return;
+  }
+
+  const terms = q.split(/\s+/).filter(Boolean);
+  const matches = DATA.filter(item => {
+    const hay = (item.num + ' ' + item.desc + ' ' + item.section).toLowerCase();
+    return terms.every(t => hay.includes(t));
+  });
+
+  countEl.textContent = matches.length;
+  pluralEl.textContent = matches.length === 1 ? '' : 'es';
+
+  if(matches.length === 0){
+    resultsEl.innerHTML = `<div class="empty"><div class="big">No top cap found</div>Try a shorter or different word — e.g. "silver", "bags", "candles".</div>`;
+    return;
+  }
+
+  resultsEl.innerHTML = matches.map((item, i) => `
+    <div class="card ${accentClasses[i % accentClasses.length]}">
+      <div class="capnum">${item.num}<span>TOP CAP</span></div>
+      <div class="divider"></div>
+      <div class="content">
+        <p class="desc">${highlight(item.desc, terms)}</p>
+        <span class="section-label ${item.section ? '' : 'none'}">${item.section ? escapeHtml(item.section) : 'x'}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+input.addEventListener('input', e => render(e.target.value));
+clearBtn.addEventListener('click', () => {
+  input.value = '';
+  render('');
+  input.focus();
+});
+
+render('');
+</script>
+</body>
+</html>
