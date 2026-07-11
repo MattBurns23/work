@@ -221,6 +221,19 @@
     font-size: 14px;
   }
 
+  .sku-banner{
+    background: linear-gradient(135deg, var(--pine), var(--pine-deep));
+    color: var(--cream);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    border: 1px solid rgba(184,146,63,0.4);
+  }
+  .sku-banner b{ color: var(--gold); }
+
   footer{
     text-align:center;
     color: #7c8a7d;
@@ -246,7 +259,7 @@
 
   <div class="search-shell">
     <div class="search-inner">
-      <input id="q" type="text" placeholder="e.g. gift bags, Grinch, silver decor, nutcrackers…" autocomplete="off" autofocus>
+      <input id="q" type="text" placeholder="e.g. gift bags, Grinch, silver decor, or a SKU…" autocomplete="off" autofocus>
       <button class="clear-btn" id="clearBtn" aria-label="Clear search">×</button>
     </div>
   </div>
@@ -255,10 +268,11 @@
     <span><span id="count">0</span> match<span id="plural">es</span></span>
   </div>
 
+  <div id="skuBanner"></div>
   <div id="results"></div>
 </div>
 
-<footer>Home Decor · Craft Seasonal Aisle · Hobbies Models · Frames · Floral Turn · Party</footer>
+<footer>Home Décor · Craft Seasonal Aisle · Hobbies Models · Frames · Floral Turn · Party</footer>
 
 <script>
 const DATA = [
@@ -267,7 +281,7 @@ const DATA = [
 ["3","Fall Tableware 2 – Basket Making / Baking",""],
 ["4","Fall baking/tableware/crafts — Christmas Tableware 1",""],
 ["5","Fall Candles/ Holders/ Arrangements – Christmas Tableware 2",""],
-["6","Fall Wall Decor/ overflow crafts – Christmas Bags/ Tissue",""],
+["6","Fall Wall Décor/ overflow crafts – Christmas Bags/ Tissue",""],
 ["7","Fall Yard Stakes/ overflow crafts – Christmas Bags/ Flat boxes",""],
 ["8","Fall Garland Tabletop – Christmas Bows/ Tags",""],
 ["9","Fall Pumpkins – Christmas Giftwrap/ Bows",""],
@@ -275,20 +289,20 @@ const DATA = [
 ["11","Fall Picks — Christmas Stocking Holders/ Monogram/ Pets",""],
 ["12","Fall Mini Wreaths – Christmas Lights and accessories",""],
 ["13","Robert Stanley and Themed ornaments","Tree Flat"],
-["14","Colorways 1 White/pink – Pink decor and all peggable and stems","Tree Flat"],
-["15","Colorways 2 Silver/blue – All peggable and stems – Blue decor","Tree Flat"],
-["16","Colorways 3 Gold/Red – Red Decor and all peggable and stems","Tree Flat"],
-["17","Colorways 4 Table pieces","Tree Flat"],
-["18","Colorways 5 Traditional – tabletop and wall decor","Tree Flat"],
-["19","Colorways 6 Traditional – Peggable and garland","Tree Flat"],
-["20","Colorways 7 Aspen Cove – Tabletop and wall decor","Tree Flat"],
-["21","Colorways 8 Aspen Cove – Peggable and garland","Tree Flat"],
+["14","Color Ways 1 White/pink – Pink décor and all peggable and stems","Tree Flat"],
+["15","Color Ways 2 Silver/blue – All peggable and stems – Blue decor","Tree Flat"],
+["16","Color Ways 3 Gold/Red – Red Décor and all peggable and stems","Tree Flat"],
+["17","Color Ways 4 Table pieces","Tree Flat"],
+["18","Color Ways 5 Traditional – tabletop and wall decor","Tree Flat"],
+["19","Color Ways 6 Traditional – Peggable and garland","Tree Flat"],
+["20","Color Ways 7 Aspen Cove – Tabletop and wall decor","Tree Flat"],
+["21","Color Ways 8 Aspen Cove – Peggable and garland","Tree Flat"],
 ["22","Christmas bows","Tree Flat"],
 ["23","Cubes matching layout – Themed ornament overflow","Seasonal Turn"],
 ["24","Cubes matching layout – Licensed ornaments / ornament hooks","Seasonal Turn"],
 ["25","Cubes matching layout – Robert Stanley overflow","Seasonal Turn"],
-["26","Colorways 9 peggable hot cocoa/sweets and treats/ gingerbread and stems","Seasonal Turn"],
-["27","Colorways 10 Gingerbread and Cocoa table top decor","Seasonal Turn"],
+["26","Color Ways 9 peggable hot cocoa/sweets and treats/ gingerbread and stems","Seasonal Turn"],
+["27","Color Ways 10 Gingerbread and Cocoa table top décor","Seasonal Turn"],
 ["28","Wall Decor",""],
 ["29","Nativity",""],
 ["30","Grinch Wearables/ Grinch Floral",""],
@@ -302,48 +316,48 @@ const DATA = [
 ["38","Lighted Tree Toppers","Party"],
 ["39","Block Signs","Party"],
 ["40","Pinecone/Natural and Snow","Party"],
-["41","Colorways 9 Sweet and treats","Party"],
-["42","Colorways 9 Sweet and treats","Party"],
-["43","Colorways 10 Candy Cane Lane","Party"],
-["44","Colorways 10 Candy Cane Lane","Party"],
-["45","Colorways 10 Gingerbread and Cocoa Decor","Party"],
-["46","Colorways 10 Gingerbread and Cocoa Decor","Party"],
-["47","Colorways 1 White","Party"],
-["48","Colorways 1 White","Party"],
-["49","Colorways 1 White Decor","Party"],
-["50","Colorways 1 Pink","Party"],
-["51","Colorways 1 Pink","Party"],
-["52","Colorways 2 Silver","Party"],
-["53","Colorways 2 Silver","Party"],
-["54","Colorways 2 Silver Decor","Party"],
-["55","Colorways 2 Blue","Party"],
-["56","Colorways 2 Blue","Party"],
-["57","Colorways 3 Gold Decor","Party"],
-["58","Colorways 3 Gold","Party"],
-["59","Colorways 3 Gold","Party"],
-["60","Colorways 3 Red","Party"],
-["61","Colorways 3 Red","Party"],
+["41","Color Ways 9 Sweet and treats","Party"],
+["42","Color Ways 9 Sweet and treats","Party"],
+["43","Color Ways 10 Candy Cane Lane","Party"],
+["44","Color Ways 10 Candy Cane Lane","Party"],
+["45","Color Ways 10 Gingerbread and Cocoa Decor","Party"],
+["46","Color Ways 10 Gingerbread and Cocoa Décor","Party"],
+["47","Color Ways 1 White","Party"],
+["48","Color Ways 1 White","Party"],
+["49","Color Ways 1 White Decor","Party"],
+["50","Color Ways 1 Pink","Party"],
+["51","Color Ways 1 Pink","Party"],
+["52","Color Ways 2 Silver","Party"],
+["53","Color Ways 2 Silver","Party"],
+["54","Color Ways 2 Silver Decor","Party"],
+["55","Color Ways 2 Blue","Party"],
+["56","Color Ways 2 Blue","Party"],
+["57","Color Ways 3 Gold Decor","Party"],
+["58","Color Ways 3 Gold","Party"],
+["59","Color Ways 3 Gold","Party"],
+["60","Color Ways 3 Red","Party"],
+["61","Color Ways 3 Red","Party"],
 ["62","Christmas Craft aisle totes/ Boxed ornaments top shelf only","Craft Seasonal Aisle"],
 ["63","Christmas Craft aisle totes/ Boxed ornaments top shelf only","Craft Seasonal Aisle"],
 ["64","Christmas Crafts 5/6","Craft Seasonal Aisle"],
 ["65","Christmas Crafts 3/4","Craft Seasonal Aisle"],
 ["66","Christmas Crafts 1/2","Craft Seasonal Aisle"],
-["67","Colorways 4 Red/white/green","Craft Seasonal Aisle"],
-["68","Colorways 4 Red/white/green","Craft Seasonal Aisle"],
-["69","Colorways 4 decor","Craft Seasonal Aisle"],
-["70","Colorways 5 Table Top","Craft Seasonal Aisle"],
-["71","Colorways 5 Table Top","Craft Seasonal Aisle"],
-["72","Colorways 6 Red/green/gold","Craft Seasonal Aisle"],
-["73","Colorways 6 Red/green/gold","Craft Seasonal Aisle"],
-["74","Colorways 6 Heartland Holiday","Craft Seasonal Aisle"],
-["75","Colorways 6 Heartland Holiday","Craft Seasonal Aisle"],
-["76","Colorways 7 Aspen Cove Wall Decor","Craft Seasonal Aisle"],
-["77","Colorways 7 Aspen Cove Table Top","Craft Seasonal Aisle"],
-["78","Colorways 7 Aspen Cove Table Top","Craft Seasonal Aisle"],
-["79","Colorways 8 Aspen Cove Champagne","Craft Seasonal Aisle"],
-["80","Colorways 8 Aspen Cove Champagne","Craft Seasonal Aisle"],
-["81","Colorways 8 Aspen Cove","Craft Seasonal Aisle"],
-["82","Colorways 8 Aspen Cove","Craft Seasonal Aisle"],
+["67","Color Ways 4 Red/white/green","Craft Seasonal Aisle"],
+["68","Color Ways 4 Red/white/green","Craft Seasonal Aisle"],
+["69","Color Ways 4 decor","Craft Seasonal Aisle"],
+["70","Color Ways 5 Table Top","Craft Seasonal Aisle"],
+["71","Color Ways 5 Table Top","Craft Seasonal Aisle"],
+["72","Color Ways 6 Red/green/gold","Craft Seasonal Aisle"],
+["73","Color Ways 6 Red/green/gold","Craft Seasonal Aisle"],
+["74","Color Ways 6 Heartland Holiday","Craft Seasonal Aisle"],
+["75","Color Ways 6 Heartland Holiday","Craft Seasonal Aisle"],
+["76","Color Ways 7 Aspen Cove Wall Decor","Craft Seasonal Aisle"],
+["77","Color Ways 7 Aspen Cove Table Top","Craft Seasonal Aisle"],
+["78","Color Ways 7 Aspen Cove Table Top","Craft Seasonal Aisle"],
+["79","Color Ways 8 Aspen Cove Champagne","Craft Seasonal Aisle"],
+["80","Color Ways 8 Aspen Cove Champagne","Craft Seasonal Aisle"],
+["81","Color Ways 8 Aspen Cove","Craft Seasonal Aisle"],
+["82","Color Ways 8 Aspen Cove","Craft Seasonal Aisle"],
 ["83","Christmas Picks 001 – 912 – 18 Skus","Hobbies Models"],
 ["84","Christmas Picks 1001 – 1603 – 17 Skus","Hobbies Models"],
 ["85","Christmas Picks 1605 – 1804 – 17 Skus","Hobbies Models"],
@@ -386,63 +400,69 @@ const DATA = [
 ["122","Christmas Stems Bushes on top","Floral Turn"],
 ["123","Fall Arrangement / Christmas Arrangement","Floral Turn"],
 ["124","Fall Arrangement Display / Christmas Arrangement Display","Floral Turn"],
-["125","My Little Christmas","Home Decor Row 1"],
-["126","My Little Christmas","Home Decor Row 1"],
-["127","My Little Christmas","Home Decor Row 1"],
-["128","Lighted Decor/ Open stock Display","Home Decor Row 1"],
-["129","Fall Boxes Displayed","Home Decor Row 1"],
-["130","Fall Party","Home Decor Row 1"],
-["131","Fall Party","Home Decor Row 1"],
-["132","Fall Party","Home Decor Row 1"],
-["133","Fall Candles","Home Decor Row 1"],
-["134","Fall Candles","Home Decor Row 1"],
-["135","Fall Potpourri","Home Decor Row 1"],
-["136","Fall Potpourri","Home Decor Row 1"],
-["137","Christmas Potpourri","Home Decor Row 1"],
-["138","Christmas Potpourri","Home Decor Row 1"],
-["139","Lanterns","Home Decor Row 2"],
-["140","My Little Christmas Boxed Ornaments","Home Decor Row 2"],
-["141","My Little Christmas Boxed Ornaments","Home Decor Row 2"],
-["142","Cardinals","Home Decor Row 2"],
-["143","Cardinals","Home Decor Row 2"],
-["144","Licensed Hello Kitty","Home Decor Row 2"],
-["145","Licensed Bluey/ Stitch","Home Decor Row 2"],
-["146","Licensed Cups","Home Decor Row 2"],
-["147","Christmas Wearables","Home Decor Row 2"],
-["148","Christmas Wearables","Home Decor Row 2"],
-["149","Christmas Wearables","Home Decor Row 2"],
-["150","Gift Bows","Home Decor Row 2"],
-["151","Gift Bows","Home Decor Row 2"],
-["152","Foldable Gift Boxes","Home Decor Row 2"],
-["153","Small Gift Bags","Home Decor Row 2"],
-["154","Small Gift Bags","Home Decor Row 2"],
-["155","Gift Bags","Home Decor Row 2"],
-["156","Gift Bags","Home Decor Row 2"],
-["157","Gift Bags","Home Decor Row 2"],
-["158","Gift Bags","Home Decor Row 2"],
-["159","Lanterns","Home Decor Row 3"],
-["160","Lanterns","Home Decor Row 3"],
-["161","Lanterns","Home Decor Row 3"],
-["162","Nutcrackers","Home Decor Row 3"],
-["163","Nutcrackers","Home Decor Row 3"],
-["164","Nutcrackers","Home Decor Row 3"],
-["165","Santa Hats","Home Decor Row 3"],
-["166","Santa Hats","Home Decor Row 3"],
-["167","My Little Christmas trees","Home Decor Row 3"],
-["168","My Little Christmas trees","Home Decor Row 3"],
-["169","My Little Christmas trees","Home Decor Row 3"],
-["170","My Little Christmas trees","Home Decor Row 3"],
-["171","Throws","Home Decor Row 3"],
-["172","Throws","Home Decor Row 3"],
-["173","Throws","Home Decor Row 3"],
-["174","Phase 2 Food","Home Decor Row 3"],
-["175","Phase 2 Food","Home Decor Row 3"],
-["176","Phase 2 Food","Home Decor Row 3"],
-["177","Phase 2 Food","Home Decor Row 3"],
-["178","Phase 2 Food","Home Decor Row 3"],
-["179","Phase 2 Food","Home Decor Row 3"],
-["180","Phase 2 Food","Home Decor Row 3"]
+["125","My Little Christmas","Home Décor Row 1"],
+["126","My Little Christmas","Home Décor Row 1"],
+["127","My Little Christmas","Home Décor Row 1"],
+["128","Lighted Décor/ Open stock Display","Home Décor Row 1"],
+["129","Fall Boxes Displayed","Home Décor Row 1"],
+["130","Fall Party","Home Décor Row 1"],
+["131","Fall Party","Home Décor Row 1"],
+["132","Fall Party","Home Décor Row 1"],
+["133","Fall Candles","Home Décor Row 1"],
+["134","Fall Candles","Home Décor Row 1"],
+["135","Fall Potpourri","Home Décor Row 1"],
+["136","Fall Potpourri","Home Décor Row 1"],
+["137","Christmas Potpourri","Home Décor Row 1"],
+["138","Christmas Potpourri","Home Décor Row 1"],
+["139","Lanterns","Home Décor Row 2"],
+["140","My Little Christmas Boxed Ornaments","Home Décor Row 2"],
+["141","My Little Christmas Boxed Ornaments","Home Décor Row 2"],
+["142","Cardinals","Home Décor Row 2"],
+["143","Cardinals","Home Décor Row 2"],
+["144","Licensed Hello Kitty","Home Décor Row 2"],
+["145","Licensed Bluey/ Stitch","Home Décor Row 2"],
+["146","Licensed Cups","Home Décor Row 2"],
+["147","Christmas Wearables","Home Décor Row 2"],
+["148","Christmas Wearables","Home Décor Row 2"],
+["149","Christmas Wearables","Home Décor Row 2"],
+["150","Gift Bows","Home Décor Row 2"],
+["151","Gift Bows","Home Décor Row 2"],
+["152","Foldable Gift Boxes","Home Décor Row 2"],
+["153","Small Gift Bags","Home Décor Row 2"],
+["154","Small Gift Bags","Home Décor Row 2"],
+["155","Gift Bags","Home Décor Row 2"],
+["156","Gift Bags","Home Décor Row 2"],
+["157","Gift Bags","Home Décor Row 2"],
+["158","Gift Bags","Home Décor Row 2"],
+["159","Lanterns","Home Décor Row 3"],
+["160","Lanterns","Home Décor Row 3"],
+["161","Lanterns","Home Décor Row 3"],
+["162","Nutcrackers","Home Décor Row 3"],
+["163","Nutcrackers","Home Décor Row 3"],
+["164","Nutcrackers","Home Décor Row 3"],
+["165","Santa Hats","Home Décor Row 3"],
+["166","Santa Hats","Home Décor Row 3"],
+["167","My Little Christmas trees","Home Décor Row 3"],
+["168","My Little Christmas trees","Home Décor Row 3"],
+["169","My Little Christmas trees","Home Décor Row 3"],
+["170","My Little Christmas trees","Home Décor Row 3"],
+["171","Throws","Home Décor Row 3"],
+["172","Throws","Home Décor Row 3"],
+["173","Throws","Home Décor Row 3"],
+["174","Phase 2 Food","Home Décor Row 3"],
+["175","Phase 2 Food","Home Décor Row 3"],
+["176","Phase 2 Food","Home Décor Row 3"],
+["177","Phase 2 Food","Home Décor Row 3"],
+["178","Phase 2 Food","Home Décor Row 3"],
+["179","Phase 2 Food","Home Décor Row 3"],
+["180","Phase 2 Food","Home Décor Row 3"]
 ].map(([num, desc, section]) => ({num, desc, section}));
+
+// SKU -> Color Ways "Side" number (from the Color Ways Location Guide).
+// A SKU's Side tells you which Color Ways group it belongs to; that Color Ways
+// number can appear across several top caps (Tree Flat, Party, Craft Seasonal Aisle, etc).
+// A small number of SKUs belong to more than one Color Ways, hence the array values.
+const SKU_TO_SIDE = {"5012125":3,"5017264":10,"5020235":8,"5028048":4,"5031190":2,"5034665":1,"5036454":6,"5044987":4,"5048483":3,"5048665":3,"5048723":2,"5057039":1,"5057062":4,"5057088":2,"5058342":3,"5059753":2,"5067525":10,"5068697":9,"5073358":8,"5081617":8,"5087663":1,"5099411":1,"5101803":4,"5116652":6,"5117007":5,"5117163":7,"5120340":1,"5153556":4,"5172333":1,"5172762":2,"5174677":[5,6],"5177530":8,"5182423":9,"5189618":9,"5218060":5,"5260492":6,"5260500":8,"5300405":9,"5326491":10,"5326509":10,"5327523":9,"5327978":6,"5333133":6,"5334305":7,"5334313":7,"5334354":7,"5335096":9,"5344312":2,"5349956":6,"5352265":6,"5353081":6,"5353149":8,"5354907":9,"5355052":5,"5356621":6,"5356977":2,"5357884":3,"5357892":3,"5358361":8,"5358742":4,"5360235":1,"5364682":6,"5368196":4,"5369400":8,"5375605":4,"5377619":10,"5378229":9,"5379557":1,"5380803":6,"5380829":10,"5380837":10,"5381769":5,"5387071":2,"5390406":2,"5390901":9,"5393368":10,"5393863":7,"5401682":6,"5451299":4,"5501226":4,"5549449":8,"5550405":9,"5550421":9,"5552823":2,"5554621":10,"5556337":6,"5556873":6,"5564935":1,"5566088":9,"5568068":8,"5568787":4,"5568829":4,"5570874":6,"5571609":6,"5571914":8,"5572110":10,"5576681":7,"5581095":7,"5581764":7,"5581780":7,"5581798":7,"5581806":7,"5584081":10,"5584263":10,"5592324":4,"5597448":7,"5597463":7,"5598701":7,"5623426":6,"5624093":6,"5626171":4,"5629506":1,"5635453":6,"5639521":5,"5643804":4,"5643820":4,"5646658":5,"5646666":5,"5650502":8,"5685565":5,"5685573":5,"5685581":5,"5692108":1,"5692173":1,"5692348":1,"5692355":3,"5692363":3,"5692389":8,"5692413":6,"5692421":8,"5696885":2,"5698816":7,"5699293":6,"5699301":6,"5699343":1,"5700687":10,"5701511":4,"5701537":4,"5702352":2,"5703400":7,"5703426":4,"5703905":2,"5703913":2,"5704051":4,"5705405":1,"5705439":1,"5705462":1,"5705504":1,"5706429":1,"5706445":1,"5706460":1,"5715768":3,"5716154":3,"5716204":3,"5719117":1,"5721709":1,"5722103":1,"5722251":1,"5725379":3,"5725478":3,"5725569":3,"5725577":3,"5727235":7,"5727482":1,"5727813":3,"5727821":1,"5727839":3,"5727870":1,"5727896":1,"5727904":3,"5727912":3,"5727920":2,"5727979":1,"5728464":5,"5728472":3,"5728480":2,"5728688":5,"5728944":10,"5728951":4,"5728969":4,"5729231":9,"5731716":6,"5731872":6,"5731880":4,"5731906":7,"5732615":7,"5732631":7,"5732680":7,"5732730":7,"5732748":7,"5735048":10,"5735766":8,"5735774":1,"5737143":1,"5741186":6,"5742127":6,"5742184":6,"5742192":6,"5742218":6,"5742234":6,"5744883":5,"5744933":7,"5745187":6,"5745872":7,"5745880":5,"5745898":5,"5745922":5,"5746300":6,"5746649":6,"5746904":7,"5746920":7,"5747670":6,"5748017":10,"5748025":10,"5748033":10,"5748785":4,"5749049":1,"5750716":6,"5750757":8,"5750823":10,"5751623":6,"5752266":7,"5756614":6,"5757646":10,"5795596":10,"5795737":10,"5856034":3,"5926456":5,"5951371":1,"5951389":1,"5951496":3,"5951512":6,"5951546":2,"5951579":8,"5951611":3,"5951629":8,"5951645":6,"5951652":4,"5952833":10,"5952841":10,"5953179":10,"5953187":10,"5953500":10,"5955893":1,"5955901":1,"5955927":2,"5955935":2,"5957931":8,"5957949":8,"5958673":9,"5958806":2,"5958848":4,"5958863":1,"5958889":6,"5958970":8,"5958988":8,"5958996":3,"5959010":2,"5959028":4,"5959036":1,"5959051":6,"5959101":8,"5959119":3,"5959796":1,"5959838":8,"5960869":4,"5961263":7,"5961404":10,"5961438":10,"5963962":4,"5964085":4,"5965686":4,"5965777":5,"5965785":5,"5966676":10,"5968102":5,"5968128":5,"5968649":8,"5968979":8,"5969431":8,"5970413":9,"5970595":9,"5970603":9,"5970678":9,"5970868":8,"5971015":9,"5972138":8,"5972146":8,"5972294":8,"5972344":5,"5972351":5,"5972385":5,"5972757":7,"5972971":9,"5972997":7,"5973011":5,"5973326":9,"5973367":4,"5973565":9,"5973573":9,"5974845":3,"5978861":7,"5979992":7,"5981238":6,"5981246":8,"5982608":5,"5982624":5,"5984067":9,"5984075":9,"5984687":8,"5984760":5,"5984877":9,"5986377":10,"5986427":4,"5986443":8,"5986468":6,"5986567":6,"5986609":9,"5986732":8,"5986765":8,"5986773":8,"5987516":8,"5987524":1,"5987532":3,"5987557":3,"5987565":1,"6044952":10,"6044994":10,"6045009":10,"6046080":10,"6046098":10,"6046775":9,"6046809":9,"6046908":9,"6047054":9,"6047104":6,"6047112":6,"6047146":8,"6047153":8,"6047161":8,"6047187":8,"6047195":3,"6047211":3,"6047229":4,"6047237":4,"6047245":2,"6047294":3,"6047310":3,"6047799":2,"6047815":2,"6047864":1,"6047880":1,"6047898":1,"6051502":10,"6051528":10,"6051536":10,"6051718":3,"6051726":3,"6051734":8,"6051742":1,"6051759":1,"6051809":3,"6051817":8,"6051833":3,"6051866":2,"6052468":6,"6052476":6,"6052484":1,"6052559":3,"6052666":8,"6052690":1,"6052815":2,"6052831":1,"6052864":3,"6052880":3,"6052898":2,"6052906":3,"6052914":8,"6052922":1,"6052930":1,"6052948":1,"6052963":1,"6052971":10,"6052989":10,"6053144":4,"6058267":3,"6062350":4,"6062681":7,"6062699":7,"6062707":7,"6062749":5,"6062756":5,"6062764":7,"6062772":7,"6063960":7,"6064018":7,"6064034":7,"6064059":7,"6064679":4,"6064687":4,"6064703":4,"6065288":4,"6065353":4,"6065858":1,"6065866":1,"6065874":2,"6065882":8,"6065916":3,"6065932":3,"6065965":1,"6065981":4,"6066039":4,"6070262":9,"6070296":4,"6070551":10,"6071328":9,"6074371":9,"6075428":9,"6081483":9,"6082556":1,"6083471":1,"6092217":9,"6093058":9,"6097299":9,"6101950":9,"6101968":9,"6101992":9,"6103089":9,"6103139":9,"6103824":9,"6105092":10,"6124911":4,"6133045":1,"6133060":8,"6142053":8,"6154462":1,"6154488":7,"6155311":7,"6155337":7,"6155535":7,"6157135":7,"6165237":9,"6165260":9,"6165310":9,"6165328":9,"6165336":9,"6166664":8,"6166706":8,"6166821":6,"6173090":6,"6221980":10,"6242218":6,"6252951":4,"6253132":4,"6253215":4,"6253223":5,"6253231":5,"6253249":5,"6253256":5,"6254643":5,"6254684":5,"6254692":3,"6254718":1,"6254767":1,"6254866":5,"6255566":7,"6255574":1,"6255590":5,"6256382":7,"6256390":4,"6256564":9,"6256655":4,"6256788":4,"6257059":9,"6257315":9,"6257414":7,"6257513":9,"6258149":9,"6258222":9,"6260897":1,"6260988":4,"6261457":6,"6261465":8,"6264105":6,"6264717":1,"6264725":3,"6264733":1,"6264741":8,"6264790":8,"6265409":6,"6265532":5,"6265862":3,"6265870":6,"6265896":2,"6265912":2,"6265938":8,"6265987":8,"6265995":1,"6266019":2,"6266027":4,"6266852":10,"6267009":3,"6267017":3,"6267538":1,"6267785":2,"6267876":2,"6267892":2,"6267900":2,"6268049":2,"6268064":2,"6268098":2,"6268122":2,"6268155":2,"6268163":2,"6268866":5,"6268981":10,"6269021":5,"6269237":5,"6269831":2,"6269849":2,"6269856":2,"6270342":3,"6270359":3,"6270367":3,"6327274":2,"6327290":2,"6327514":10,"6327779":2,"6327787":6,"6327795":6,"6327837":1,"6327860":1,"6329080":2,"6329098":2,"6329619":1,"6329650":10,"6329759":9,"6330435":10,"6330450":9,"6330682":9,"6330708":9,"6330849":9,"6330856":9,"6330864":9,"6330872":9,"6330971":9,"6330989":9,"6331110":10,"6331128":10,"6331136":10,"6331151":10,"6331193":10,"6331235":10,"6331268":10,"6331789":9,"6331805":9,"6331813":1,"6332662":2,"6332670":2,"6332779":2,"6332787":2,"6332811":2,"6332837":2,"6333041":1,"6333058":8,"6333066":2,"6333074":8,"6333082":1,"6333090":2,"6333108":2,"6333116":2,"6334205":6,"6334213":6,"6334221":6,"6334387":2,"6334429":6,"6334437":2,"6334445":1,"6334478":3,"6334486":8,"6334502":3,"6334528":2,"6334585":8,"6334775":6,"6334999":6,"6335004":6,"6335566":6,"6335574":8,"6335582":8,"6335590":6,"6335608":6,"6335632":8,"6335640":8,"6335657":8,"6335707":8,"6335723":8,"6335798":3,"6335806":6,"6335830":6,"6335871":8,"6335947":6,"6336044":8,"6336051":8,"6336069":8,"6336531":1,"6336549":1,"6336697":1,"6337653":3,"6337703":1,"6337794":3,"6337802":3,"6337851":2,"6337935":1,"6338040":7,"6338057":7,"6338115":5,"6338123":5,"6338156":7,"6338164":1,"6338172":5,"6338180":8,"6338198":2,"6338206":3,"6338214":1,"6338545":7,"6338586":5,"6338636":5,"6338644":3,"6339220":7,"6339303":3,"6339311":5,"6339501":3,"6339550":8,"6339568":8,"6339576":8,"6339584":8,"6339667":6,"6339733":8,"6339758":8,"6339774":8,"6339790":8,"6339816":8,"6339824":8,"6339873":6,"6339915":6,"6339923":6,"6339931":6,"6339998":6,"6340012":6,"6340046":6,"6340129":6,"6340145":6,"6340194":8,"6340202":1,"6340269":1,"6340277":6,"6340749":1,"6340756":1,"6340764":8,"6340772":2,"6340798":1,"6340806":1,"6340814":8,"6340822":2,"6340848":1,"6340905":1,"6340939":7,"6341002":9,"6341069":9,"6341119":9,"6341127":9,"6341192":9,"6341226":9,"6341242":9,"6341275":9,"6341291":9,"6341309":9,"6341887":1,"6341911":1,"6343305":4,"6343313":3,"6343321":2,"6343339":3,"6343354":1,"6343362":8,"6343388":1,"6343438":2,"6343479":2,"6344097":4,"6344170":4,"6344188":4,"6344204":4,"6344261":10,"6344303":10,"6344329":10,"6344337":10,"6344345":10,"6344352":10,"6344360":10,"6344386":10,"6344444":9,"6344451":9,"6344469":9,"6344543":9,"6344618":[4,6],"6344626":2,"6344634":2,"6345227":5,"6345243":5,"6345326":7,"6345359":7,"6345375":5,"6345383":5,"6345532":5,"6345573":5,"6345813":5,"6345946":7,"6345961":7,"6345979":7,"6345995":7,"6346043":1,"6346076":1,"6346084":1,"6346209":7,"6346308":10,"6346324":10,"6346506":7,"6346829":3,"6346837":3,"6346845":3,"6346852":3,"6346894":1,"6346910":1,"6346969":5,"6346977":5,"6347017":7,"6347025":7,"6347041":7,"6347074":7,"6347124":1,"6347132":1,"6347231":1,"6347389":10,"6347397":10,"6347710":9,"6347736":9,"6347769":9,"6347777":9,"6347835":9,"6348635":1,"6348643":2,"6348650":2,"6348668":3,"6348676":2,"6348684":3,"6348692":8,"6348700":1,"6348718":10,"6348726":2,"6348734":1,"6348759":8,"6348775":3,"6348791":3,"6348809":9,"6348817":4,"6348833":10,"6348858":6,"6348874":2,"6348890":10,"6348924":8,"6348932":8,"6348940":10,"6348957":10,"6348981":9,"6348999":9,"6349005":3,"6349542":7,"6349567":7,"6349575":7,"6349948":9,"6350078":7,"6350102":7,"6350466":10,"6350474":10,"6350615":6,"6350748":1,"6350920":3,"6350961":1,"6351043":9,"6351902":5,"6352272":5,"6352298":9,"6352314":9,"6352322":9,"6352413":9,"6352470":9,"6352488":9,"6352652":9,"6352710":5,"6352744":9,"6352751":7,"6352777":3,"6352785":1,"6352801":7,"6352819":7,"6352884":5,"6352892":3,"6352975":2,"6353007":1,"6353130":10,"6353536":1,"6353544":1,"6353643":4,"6353650":4,"6353734":1,"6353791":4,"6353908":5,"6353916":5,"6353924":5,"6353965":5,"6353973":3,"6353981":3,"6354104":7,"6354112":7,"6355242":1,"6355259":8,"6356729":7,"6356976":4,"6357362":5,"6357495":1,"6357537":1,"6357560":2,"6357586":4,"6357594":4,"6357610":1,"6357628":3,"6357651":4,"6357677":1,"6357826":4,"6357917":4,"6357958":4,"6357966":4,"6358071":4,"6358089":4,"6358105":4,"6358220":4,"6358238":5,"6358618":4,"6358717":9,"6358733":9,"6358816":2,"6358824":4,"6359178":4,"6359186":4,"6360093":7,"6360101":7,"6360192":7,"6380406":1,"6380422":1,"6416440":9,"6416465":9,"6416499":9,"6416507":9,"6416515":9,"6416523":9,"6416531":9,"6416549":9,"6416556":9,"6416564":9,"6416572":9,"6416580":9,"6416598":9,"6416606":9,"6416614":9,"6417364":1,"6417828":4,"6417836":4,"6417844":4,"6417851":4,"6417869":4,"6417877":4,"6417885":4,"6417893":4,"6418057":9,"6418065":9,"6418164":3,"6418172":2,"6418180":1,"6418198":3,"6418206":2,"6418214":2,"6418289":1,"6418297":8,"6418305":3,"6418313":2,"6418321":3,"6418339":8,"6418347":1,"6418354":2,"6418362":2,"6418370":1,"6418404":3,"6418412":8,"6418420":1,"6418438":1,"6418446":2,"6418453":2,"6418461":3,"6418479":2,"6418669":1,"6418677":1,"6418685":2,"6418693":2,"6418701":4,"6418800":3,"6418834":3,"6418867":3,"6418891":3,"6418909":3,"6418917":8,"6418925":8,"6418933":1,"6418941":1,"6418958":1,"6418966":1,"6419055":5,"6419063":5,"6419097":5,"6419105":5,"6419113":5,"6419121":5,"6419139":5,"6419147":5,"6419154":5,"6419329":9,"6419394":8,"6419402":8,"6419410":8,"6419527":10,"6419535":9,"6419543":6,"6419550":8,"6419568":8,"6419576":8,"6419584":8,"6419592":6,"6419600":6,"6419618":6,"6419634":8,"6419642":9,"6419659":10,"6419667":6,"6419675":1,"6419683":9,"6419691":6,"6419709":8,"6419733":1,"6419741":6,"6419758":9,"6419766":4,"6419790":4,"6419808":6,"6419816":6,"6419873":9,"6419899":3,"6419923":3,"6419931":2,"6420004":1,"6420020":3,"6420038":2,"6420459":6,"6420616":7,"6420624":7,"6420632":7,"6420640":8,"6420657":8,"6420665":8,"6420673":8,"6420681":8,"6420699":8,"6420715":7,"6420731":7,"6420749":7,"6420756":7,"6420764":7,"6420772":7,"6420780":2,"6420798":2,"6420806":2,"6420814":2,"6421119":8,"6421127":8,"6421135":4,"6421143":4,"6421150":4,"6421184":5,"6421192":5,"6421200":5,"6421218":5,"6421333":10,"6421341":10,"6421366":6,"6421382":8,"6421390":3,"6421408":2,"6421416":3,"6421424":2,"6421432":8,"6421440":1,"6421457":2,"6421465":2,"6421473":1,"6421515":2,"6421531":3,"6421549":2,"6421556":8,"6421564":3,"6421614":5,"6421648":5,"6422323":9,"6422521":9,"6422539":9,"6422737":9,"6422745":9,"6422778":9,"6422786":9,"6422802":9,"6422851":9,"6422869":9,"6422901":9,"6423321":8,"6423339":9,"6423347":7,"6423354":9,"6423362":8,"6423370":7,"6423388":9,"6423396":9,"6423404":5,"6423412":2,"6423420":5,"6423438":2,"6423446":5,"6423453":6,"6423578":7,"6423586":7,"6423602":5,"6423610":1,"6423990":1,"6424006":1,"6424022":1,"6424048":8,"6424055":8,"6424071":8,"6424527":8,"6424675":6,"6424790":6,"6424808":6,"6424816":6,"6424824":6,"6424832":6,"6424956":6,"6424980":6,"6424998":8,"6425003":8,"6425011":6,"6425029":9,"6425037":8,"6425045":8,"6425052":8,"6425060":6,"6425078":8,"6425086":8,"6425094":8,"6425102":8,"6425128":8,"6425136":8,"6425151":8,"6425326":9,"6425789":8,"6425797":10,"6425805":8,"6425813":10,"6425821":10,"6425839":10,"6425847":8,"6425854":8,"6425862":6,"6425888":10,"6425896":10,"6425904":3,"6425912":2,"6425920":3,"6425938":1,"6425946":2,"6425953":2,"6425961":10,"6425979":7,"6425987":7,"6426175":3,"6426183":8,"6426415":9,"6426431":9,"6426449":9,"6426464":9,"6426589":9,"6426787":8,"6426837":8,"6426852":8,"6426886":8,"6426944":9,"6427116":9,"6427140":6,"6427405":6,"6427413":10,"6427421":6,"6427447":6,"6427454":6,"6427462":6,"6427470":1,"6427488":1,"6427504":8,"6427512":3,"6427546":1,"6427710":3,"6427751":3,"6427793":1,"6427835":8,"6427918":1,"6427959":2,"6427991":2,"6428049":6,"6428494":1,"6428502":3,"6428510":2,"6428528":9,"6428536":1,"6428544":5,"6428551":5,"6428569":2,"6428577":2,"6428585":2,"6428593":1,"6428601":2,"6428643":8,"6428676":3,"6428684":1,"6428940":2,"6428965":2,"6428981":8,"6428999":8,"6429260":9,"6429310":5,"6429328":5,"6429336":10,"6429351":3,"6429369":2,"6429377":6,"6429427":1,"6430177":8,"6430748":4,"6430995":5,"6431001":3,"6431019":3,"6431027":8,"6431035":8,"6431043":8,"6431050":8,"6431068":5,"6431076":5,"6431084":5,"6431092":5,"6431100":5,"6431118":5,"6431126":5,"6431134":5,"6431159":5,"6431167":5,"6431217":7,"6431225":7,"6431233":8,"6431241":8,"6431258":8,"6431266":8,"6431274":7,"6431282":7,"6431290":7,"6431308":7,"6431316":7,"6431324":7,"6431332":7,"6431357":7,"6432009":8,"6432066":2,"6432074":2,"6432082":2,"6432090":2,"6432108":8,"6432124":8,"6432512":2,"6432520":2,"6432538":5,"6432546":5,"6432553":5,"6432561":5,"6433148":3,"6433262":7,"6433270":5,"6433288":7,"6433304":5,"6433338":7,"6433346":7,"6433361":5,"6433510":1,"6433528":1,"6433536":2,"6433544":2,"6433601":3,"6433619":1,"6433627":2,"6433635":2,"6433643":1,"6433650":8,"6433668":8,"6433676":3,"6433684":1,"6433692":2,"6433700":2,"6433718":1,"6433726":8,"6433734":8,"6433932":1,"6433940":1,"6434039":3,"6434138":7,"6434153":7,"6434161":7,"6434187":7,"6434203":7,"6434344":10,"6434369":10,"6434377":10,"6434385":10,"6434443":10,"6434450":10,"6434468":10,"6434476":10,"6434484":10,"6434500":10,"6434518":10,"6434542":10,"6434559":10,"6434567":10,"6434575":10,"6434583":10,"6434591":10,"6434609":10,"6434617":10,"6434625":6,"6434633":8,"6434641":10,"6434658":10,"6434690":10,"6434708":10,"6434716":10,"6434724":10,"6434732":10,"6434740":10,"6434757":10,"6434765":10,"6434781":10,"6434799":10,"6434815":10,"6434823":10,"6434849":10,"6434898":10,"6434906":10,"6434914":10,"6434930":10,"6434963":10,"6434971":10,"6434989":10,"6435275":10,"6435317":10,"6435556":10,"6435564":10,"6436133":2,"6436141":4,"6436158":4,"6436174":4,"6436182":8,"6436190":7,"6436208":4,"6436216":4,"6436224":7,"6436232":4,"6436240":4,"6436257":7,"6436265":8,"6436752":7,"6436802":4,"6436810":4,"6436836":4,"6436844":4,"6436877":4,"6436893":4,"6436968":4,"6436984":4,"6437008":4,"6437024":4,"6437131":4,"6438790":4,"6438832":4,"6438840":4,"6438857":4,"6438865":4,"6438873":4,"6438881":7,"6439707":4,"6439715":4,"6439723":4,"6439731":4,"6439749":4,"6439756":4,"6439764":4,"6439780":4,"6439798":4,"6440184":7,"6440192":6,"6440226":7,"6440234":3,"6440259":5,"6440333":7,"6440358":5,"6440374":5,"6440382":5,"6440390":5,"6440408":7,"6440416":7,"6440606":10,"6440614":10,"6440622":10,"6440630":10,"6440648":10,"6440655":10,"6440663":10,"6440671":10,"6440689":10,"6440929":4,"6441000":7,"6441018":7,"6441034":4,"6441042":4,"6441059":4,"6441067":4,"6441075":4,"6441109":4,"6441158":4,"6441166":4,"6441174":4,"6441208":4,"6441240":3,"6441257":4,"6441265":7,"6441612":4,"6441638":4,"6441646":4,"6441679":4,"6441687":4,"6441695":4,"6441802":5,"6442172":7,"6442180":7,"6442206":5,"6442214":7,"6442222":5,"6442602":3,"6442610":3,"6442628":7,"6442644":4,"6442651":5,"6442669":5,"6442677":4,"6442685":3,"6442693":5,"6442701":3,"6442719":4,"6442727":5,"6442735":4,"6443444":7,"6443451":5,"6443469":7,"6443477":7,"6443485":3,"6443634":7,"6443659":7,"6443667":7,"6443675":7,"6443683":7,"6443691":7,"6443709":7,"6443717":7,"6443725":5,"6443733":7,"6443824":5,"6443832":3,"6443840":5,"6443857":7,"6443865":7,"6443978":4,"6443979":4,"6443981":4,"6443982":4,"6443983":4,"6443984":4,"6443996":4,"6443997":4,"6443999":4,"6444000":4,"6444001":4,"6444002":4,"6444003":4,"6444007":4,"6444008":4,"6507065":3,"6507081":3,"6510259":3,"6510283":3,"6548606":9};
 
 const accentClasses = ["", "pine", "gold"];
 
@@ -465,29 +485,60 @@ const countEl = document.getElementById('count');
 const pluralEl = document.getElementById('plural');
 const input = document.getElementById('q');
 const clearBtn = document.getElementById('clearBtn');
+const skuBannerEl = document.getElementById('skuBanner');
+
+function colorWaysMatcher(side){
+  return new RegExp(`color ways\\s*${side}\\b`, 'i');
+}
 
 function render(query){
-  const q = query.trim().toLowerCase();
+  const qRaw = query.trim();
+  const q = qRaw.toLowerCase();
   clearBtn.classList.toggle('show', q.length > 0);
+  skuBannerEl.innerHTML = '';
 
   if(!q){
-    resultsEl.innerHTML = `<div class="idle">Start typing a description, category, or top cap number above.</div>`;
+    resultsEl.innerHTML = `<div class="idle">Start typing a description, category, top cap number, or SKU above.</div>`;
     countEl.textContent = '0';
     pluralEl.textContent = 'es';
     return;
   }
 
   const terms = q.split(/\s+/).filter(Boolean);
-  const matches = DATA.filter(item => {
+
+  // Text search across number, description, section
+  const textMatches = DATA.filter(item => {
     const hay = (item.num + ' ' + item.desc + ' ' + item.section).toLowerCase();
     return terms.every(t => hay.includes(t));
+  });
+
+  // SKU search: exact match against the Color Ways Location Guide
+  let skuMatches = [];
+  const skuHit = SKU_TO_SIDE[qRaw];
+  if(skuHit !== undefined){
+    const sides = Array.isArray(skuHit) ? skuHit : [skuHit];
+    skuMatches = DATA.filter(item => sides.some(s => colorWaysMatcher(s).test(item.desc)));
+
+    const sideLabel = sides.length > 1 ? `Color Ways ${sides.join(' & ')}` : `Color Ways ${sides[0]}`;
+    const capList = skuMatches.map(m => m.num).join(', ');
+    skuBannerEl.innerHTML = `<div class="sku-banner">SKU <b>${escapeHtml(qRaw)}</b> is stocked in <b>${sideLabel}</b>.<br>Overstock may be on top cap${skuMatches.length === 1 ? '' : 's'}: <b>${capList || '—'}</b></div>`;
+  }
+
+  // Merge, de-duplicate by cap number, SKU matches first
+  const seen = new Set();
+  const matches = [];
+  [...skuMatches, ...textMatches].forEach(item => {
+    if(!seen.has(item.num)){
+      seen.add(item.num);
+      matches.push(item);
+    }
   });
 
   countEl.textContent = matches.length;
   pluralEl.textContent = matches.length === 1 ? '' : 'es';
 
   if(matches.length === 0){
-    resultsEl.innerHTML = `<div class="empty"><div class="big">No top cap found</div>Try a shorter or different word — e.g. "silver", "bags", "candles".</div>`;
+    resultsEl.innerHTML = `<div class="empty"><div class="big">No top cap found</div>Try a shorter or different word — e.g. "silver", "bags", "candles" — or double check the SKU.</div>`;
     return;
   }
 
